@@ -33,42 +33,43 @@ class VenueDetails extends Component {
   }
 
   addEvent = () => {
-    CalendarModule.addEvent('Birthday Party', '4 Privet Drive, Surrey', moment().toISOString());
+    CalendarModule.addEvent(this.props.venueName, this.props.address, moment().toISOString());
   }
 
   render() {
+    const {venueName, imageUrl, address, phone, url, rating, review} = this.props
     return (
         <ScrollView>
         <View style={styles.container}>
             <Text style={styles.headerText}>
-              {this.props.venueName}
+              {venueName}
             </Text>
             <Image
-            source={{uri:this.props.imageUrl}}
+            source={{uri:imageUrl}}
             style={styles.image}
             />
             <View style={styles.contentContainer}>
               <Text style={styles.rightText}>Address:  </Text>
-              <Text style={styles.leftText}>{this.props.address}</Text>
+              <Text style={styles.leftText}>{address}</Text>
             </View>
             <View style={styles.contentContainer}>
               <Text style={styles.rightText}>Phone:  </Text>
-              <Text style={styles.leftText}>{this.props.phone}</Text>
+              <Text style={styles.leftText}>{phone}</Text>
             </View>
             <View style={styles.contentContainer}>
               <Text style={styles.rightText}>More about us:  </Text>
               <TouchableOpacity style={{flex:3}} onPress={()=>Linking.openURL(this.props.url)}>
-                <Text style={styles.leftText}>{this.props.url}</Text>
+                <Text style={styles.leftText}>{url}</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.contentContainer}>
               <Text style={styles.rightText}>Rating:  </Text>
-              <Text style={styles.leftText}>{this.props.rating}</Text>
+              <Text style={styles.leftText}>{rating}</Text>
             </View>
             <View style={styles.contentContainer}>
               <Text style={styles.rightText}>Review:  </Text>
               <TouchableOpacity style={{flex:3}} onPress={()=>this.navigateToReviewScreen()}>
-                <Text style={styles.leftText}>{this.props.review}</Text>
+                <Text style={styles.leftText}>{review}</Text>
               </TouchableOpacity>
             </View>
             <TouchableOpacity style={{alignSelf:'center', marginTop:10}} onPress={()=>this.navigateToMap(this.props.latitude, this.props.longitude, this.props.address)}>
